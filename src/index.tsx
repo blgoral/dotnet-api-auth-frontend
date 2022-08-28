@@ -5,18 +5,32 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Keycloak from 'keycloak-js';
 
+const keycloak = new Keycloak();
+
 function initKeycloak() {
-  const keycloak = new Keycloak();
   keycloak.init({
     onLoad: 'login-required'
   }).then(function(authenticated) {
-      alert(authenticated ? 'authenticated' : 'not authenticated');
+      console.log(authenticated ? 'authenticated' : 'not authenticated');
+      loadData();
   }).catch(function() {
-      alert('failed to initialize');
+      console.log('failed to initialize');
   });
 }
 
 initKeycloak();
+
+const loadData = () => {
+  const apiUrl = 'https://localhost:7180/WeatherForecast';
+
+  fetch(apiUrl, {
+    headers: {
+      'Authorization': 'Bearer ' + keycloak.token
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+}
 
 
 const root = ReactDOM.createRoot(
