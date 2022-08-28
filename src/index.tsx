@@ -3,6 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Keycloak from 'keycloak-js';
+
+function initKeycloak() {
+  const keycloak = new Keycloak();
+  keycloak.init({
+    onLoad: 'login-required'
+  }).then(function(authenticated) {
+      alert(authenticated ? 'authenticated' : 'not authenticated');
+  }).catch(function() {
+      alert('failed to initialize');
+  });
+}
+
+initKeycloak();
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

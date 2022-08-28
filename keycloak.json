@@ -1,9 +1,0 @@
-{
-  "realm": "dotnetrealm",
-  "auth-server-url": "http://localhost:8080/",
-  "ssl-required": "none",
-  "resource": "dotnet-api",
-  "public-client": true,
-  "verify-token-audience": true,
-  "confidential-port": 0
-}
